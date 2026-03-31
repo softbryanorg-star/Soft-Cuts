@@ -1,19 +1,61 @@
 import axios from "axios";
 
+// ✅ Base URL from environment (fallback included for safety)
+const BASE_URL =
+  import.meta.env.VITE_API_URL || "https://soft-cuts-backend.onrender.com";
+
+// ✅ Create axios instance
 const API = axios.create({
-  baseURL: "https://soft-cuts-backend.onrender.com", // Replace with your backend URL
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// Admin login
-export const adminLogin = (email, password) => API.post("/api/admin/login", { email, password });
+// ✅ Request interceptor (optional but powerful)
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
 
-// Get bookings
-export const getBookings = (token) =>
-  API.get("/api/admin/bookings", { headers: { Authorization: `Bearer ${token}` } });
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
 
-// Change password
-export const changePassword = (token, oldPassword, newPassword) =>
-  API.post("/api/admin/change-password", { oldPassword, newPassword }, { headers: { Authorization: `Bearer ${token}` } });
+  return config;
+});
+
+// =========================
+// ✅ AUTH
+// =========================
+
+export const adminLogin = (email, password) =>
+  API.post("/api/admin/login", { email, password });
+
+// =========================
+// ✅ ADMIN
+// =========================
+
+export const getBookings = () =>
+  API.get("/api/admin/bookings");
+
+export const changePassword = (oldPassword, newPassword) =>
+  API.post("/api/admin/change-password", {
+    oldPassword,
+    newPassword,
+  });
+
+// =========================
+// ✅ ERROR HANDLING (OPTIONAL BUT PRO)
+// =========================
+
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error(
+      "API ERROR:",
+      error.response?.data || error.message
+    );
+    return Promise.reject(error);
+  }
+);
+
+export default API;
