@@ -1,5 +1,8 @@
 import axios from "axios";
 
+// ✅ Debug log (THIS IS WHAT WE NEED RIGHT NOW)
+console.log("API BASE URL:", import.meta.env.VITE_API_URL);
+
 // ✅ Base URL from environment (fallback included for safety)
 const BASE_URL =
   import.meta.env.VITE_API_URL || "https://soft-cuts-backend.onrender.com";
@@ -12,9 +15,9 @@ const API = axios.create({
   },
 });
 
-// ✅ Request interceptor (optional but powerful)
+// ✅ Request interceptor
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("adminToken"); // 🔥 FIXED (you used adminToken in login)
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -38,13 +41,13 @@ export const getBookings = () =>
   API.get("/api/admin/bookings");
 
 export const changePassword = (oldPassword, newPassword) =>
-  API.post("/api/admin/change-password", {
+  API.put("/api/admin/change-password", {
     oldPassword,
     newPassword,
   });
 
 // =========================
-// ✅ ERROR HANDLING (OPTIONAL BUT PRO)
+// ✅ ERROR HANDLING
 // =========================
 
 API.interceptors.response.use(
