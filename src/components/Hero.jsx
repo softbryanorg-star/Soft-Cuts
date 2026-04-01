@@ -31,7 +31,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.a
-          href="https://wa.me/14155238886"
+          href="https://wa.me/14155238886?text=join%20labor-facing"
           className="hero-btn"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
