@@ -2,11 +2,18 @@ import React from "react";
 import "./FloatingCTA.css";
 
 export default function FloatingCTA() {
+  const phone = "14155238886";
+
+  // DO NOT CHANGE THIS
+  const message = encodeURIComponent("joinlabor-facing");
+
+  const whatsappLink = `https://wa.me/${phone}?text=${message}`;
+
   return (
     <a
-      href="https://wa.me/14155238886?text=join%20labor-facing"
+      href={whatsappLink}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className="floating-whatsapp"
     >
       📲 Chat on WhatsApp

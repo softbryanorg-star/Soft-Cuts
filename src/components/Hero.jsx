@@ -2,9 +2,16 @@ import "./Hero.css";
 import { motion } from "framer-motion";
 
 export default function Hero() {
+  const phone = "14155238886";
+
+  // ✅ KEEP THIS EXACT TEXT (DO NOT CHANGE)
+  const message = encodeURIComponent("joinlabor-facing");
+
+  const whatsappLink = `https://wa.me/${phone}?text=${message}`;
+
   return (
     <section className="hero" id="home">
-      {/* BACKGROUND IMAGE FROM PUBLIC */}
+      {/* BACKGROUND IMAGE */}
       <div className="hero-bg"></div>
 
       {/* OVERLAY */}
@@ -31,7 +38,9 @@ export default function Hero() {
         </motion.p>
 
         <motion.a
-          href="https://wa.me/14155238886?text=join%20labor-facing"
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
           className="hero-btn"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
