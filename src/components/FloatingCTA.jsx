@@ -5,7 +5,7 @@ export default function FloatingCTA() {
   const phone = "14155238886";
 
   // DO NOT CHANGE THIS
-  const message = encodeURIComponent("joinlabor-facing");
+  const message = encodeURIComponent("join labor-facing");
 
   const whatsappLink = `https://wa.me/${phone}?text=${message}`;
 

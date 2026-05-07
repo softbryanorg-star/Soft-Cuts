@@ -4,7 +4,7 @@ export default function About() {
   const phone = "14155238886";
 
   // ✅ DO NOT CHANGE THIS (activates your chatbot)
-  const message = encodeURIComponent("joinlabor-facing");
+  const message = encodeURIComponent("join labor-facing");
 
   const whatsappLink = `https://wa.me/${phone}?text=${message}`;
 
